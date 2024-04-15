@@ -1,6 +1,6 @@
 const {getAllTopics} = require('../models/topics.model');
 
-exports.getTopics = async (req, res) => {
+exports.getAllTopics = async (req, res) => {
     
     const topics = await getAllTopics();
     if(!topics || topics.length === 0) {
