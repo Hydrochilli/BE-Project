@@ -31,3 +31,19 @@ describe('should return an article by article_id', () => {
     test('should return a 400 if id request input is in wrong format e.g a string ', async () => {
         await request(app).get('/api/articles/i-am-not-a-number').expect(400)
     })
+
+describe('selectAllArticles', () => {
+    test('should retunr an array of all article objects, in descending order by date', async () => {
+    const { body } = await request(app).get('/api/articles').expect(200)
+    
+    expect(body.articles.length).toBe(13)
+     })
+    
+    test('should not include body in properties and shouod have comment_count property', async () => {
+       const { body } = await request(app).get('/api/articles').expect(200)
+       body.articles.forEach(article => {
+        expect(article).not.toHaveProperty('body')
+        expect(article).toHaveProperty('comment_count')
+    }) 
+    })
+})
