@@ -18,6 +18,6 @@ describe('/api/topics', () => {
   });
   test('should return a 404 status for invalid routes', async () => {
     const { body } = await request(app).get('/api/invalid-route').expect(404);
-    expect(body.message).toBe('page not found');
+    expect(body.message).toBe('route is invalid');
   });
 });
