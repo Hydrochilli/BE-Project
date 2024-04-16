@@ -5,7 +5,7 @@ const testData = require('../db/data/test-data/index')
 const db = require('../db/connection')
 const app = require('../app')
 
-beforeEach(() => seed(testData))
+
 afterAll(() => db.end())
 
 describe( 'testing get request for available endpoints', () => {

@@ -11,7 +11,7 @@ describe('should return an article by article_id', () => {
     it('returns an object with the correct property key: value pairs- fitting the ID given', async () => {
         const { body } = await request(app).get('/api/articles/2').expect(200)
         const {article} = body;
-        console.log(article)
+       
         expect(article).toEqual({
             article_id: 2,
             title: 'Sony Vaio; or, The Laptop',
