@@ -38,6 +38,7 @@ describe('selectAllArticles', () => {
     
     expect(body.articles.length).toBe(13)
      })
+    })
     
     test('should not include body in properties and shouod have comment_count property', async () => {
        const { body } = await request(app).get('/api/articles').expect(200)
@@ -45,5 +46,26 @@ describe('selectAllArticles', () => {
         expect(article).not.toHaveProperty('body')
         expect(article).toHaveProperty('comment_count')
     }) 
-    })
 })
+ 
+describe(' getCommentsByID /api/articles/:article_id/comments', () => {
+    test('Returns an array of comments on a property of an object , matching valid article_id which has correct properties and sorted by date (descending)', async () => {
+      const { body } = await request(app)
+       
+      .get('/api/articles/1/comments')
+        .expect(200);
+      
+      expect(Array.isArray(body.article.comments)).toBe(true)
+      expect(body.article.comments).toHaveLength(11)
+      expect(body.article.comments[0]).toHaveProperty('comment_id')
+      expect(body.article.comments[1]).toHaveProperty('votes')
+      
+      
+      
+      
+ 
+
+     })
+    
+    });
+

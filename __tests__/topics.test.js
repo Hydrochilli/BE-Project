@@ -5,7 +5,8 @@ const db = require('../db/connection');
 const app = require('../app.js');
 
 
-afterAll(() => db.end());
+beforeEach(() => seed(testData))
+afterAll(() => db.end())
 
 describe('/api/topics', () => {
   test('should give a status of 200', async () => {
