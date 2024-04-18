@@ -6,6 +6,7 @@ const db = require('../db/connection')
 const app = require('../app')
 
 
+beforeEach(() => seed(testData))
 afterAll(() => db.end())
 
 describe( 'testing get request for available endpoints', () => {

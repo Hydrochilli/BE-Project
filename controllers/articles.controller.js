@@ -1,7 +1,8 @@
 const {selectArticleByID,
-        selectAllArticles
+        selectAllArticles,
+       
     } = require('../models/articles.model')
-
+const { selectCommentsByArticleID } = require('../models/comments.model')
 exports.getArticleByID = async (req, res, next) => {
      const { article_id} = req.params
     if(isNaN(article_id)) {
@@ -34,6 +35,24 @@ try {
         return rest
     })
     res.status(200).send({ articles: formattedArticles})
+} catch (error) {
+    next(error)
+}
+}
+exports.getCommentsByArticleID = async (req, res, next) => {
+  
+  const { article_id} = req.params
+    try{
+       const comments = await selectCommentsByArticleID(article_id)
+    const article = await selectArticleByID(article_id)
+ 
+ if (!article) {
+    return res.status(404).send({ message: 'Article not found'})
+ }
+ 
+ article.comments = comments
+
+    res.status(200).send({ article })
 } catch (error) {
     next(error)
 }
